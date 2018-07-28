@@ -20,22 +20,26 @@ public class SensorService extends Service {
     private static final int NOTIFICATION_ID = 99;
     public SensorService(Context applicationContext) {
         super();
-        Log.i("HERE", "here I am!");
+        Log.i("Sensor", "here I am!");
     }
 
     public SensorService() {
     }
+
+
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         super.onStartCommand(intent, flags, startId);
-        startTimer();
         runAsForeground();
+        startTimer();
         return START_STICKY;
     }
+
+
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.i("EXIT", "ondestroy!");
+        Log.i("Sensor", "ondestroy!");
         Intent broadcastIntent = new Intent("uk.ac.shef.oak.ActivityRecognition.RestartSensor");
         sendBroadcast(broadcastIntent);
         stoptimertask();
@@ -44,7 +48,6 @@ public class SensorService extends Service {
     private Timer timer;
     private TimerTask timerTask;
     long oldTime=0;
-
 
     public void startTimer() {
         //set a new Timer
@@ -63,7 +66,7 @@ public class SensorService extends Service {
     public void initializeTimerTask() {
         timerTask = new TimerTask() {
             public void run() {
-                Log.i("in timer", "in timer ++++  "+ (counter++));
+                Log.i("Sensor", "in timer ++++  "+ (counter++));
             }
         };
     }
